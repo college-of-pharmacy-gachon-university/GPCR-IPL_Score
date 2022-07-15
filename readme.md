@@ -40,7 +40,9 @@ a.	Follow the documentation for installation instructions.
        
        ii.	This will assign the generic residue numbering system to the input `{pdbid}_protein.pdb file` and produces the output file in `{pdbid}_protein_GPCRDB.pdb`.
        
-       iii.	Using the Jupyter Notebook (Convert_GPCRPDBs_to_PandasDataframe.ipynb), convert *.pdb into *.csv file.
+       iii.	Use the Jupyter notebook under Data Preparation Folder to convert `*.pdb` into `*.csv file`.
+                
+        Convert_GPCRPDBs_to_PandasDataframe.ipynb
        
     b)	Save prepared protein into a MOL2 format file `{pdbid}_ protein.mol2` to perform in-situ minimization using the Szybki (OpenEye Scientific Software).
     
@@ -132,4 +134,4 @@ a.	Follow the documentation for installation instructions.
         BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
         MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
 
-### For any queries regarding the above work, kindly contact Prof. Mi-hyun Kim (kmh0515@gachon.ac.kr).
+#### For any queries regarding the above work, kindly contact Prof. Mi-hyun Kim (kmh0515@gachon.ac.kr).
