@@ -95,18 +95,19 @@ The following programs/packages should be installed.
      
     f) Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
         
-        Use the follwing script under the Feature Generation Folder step by step:
+        Use the follwing script under the Feature Generation Folder step by step for batch execution:
         sh step1.fuzcav_tagged.sh
         sh step2.listtagged.sh
         sh step3.fuzcav_fp.sh
         
-    g) Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and using the `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
+    g) Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
     
-        Use the script under the Feature Generation
+        Use the script under the Feature Generation for batch execution
         python E3FP_Gen.py
 
-7. GPCR feature compilation using the KNIME workflow to make a feature matrix:
-    a) To generate a feature matrix using the KNIME Workflow, the following four files are required.
+7. #### GPCR feature compilation using the KNIME workflow to make a feature matrix:
+
+    a) To generate a feature matrix using the KNIME, the following four files are required.
     
     i. GPCR generic residue number file from `4(a(iii))`.
     
@@ -116,15 +117,14 @@ The following programs/packages should be installed.
     
     iv.	Ligand feature file `*.csv` from `5(c) or 6(h)`.
 
-    b) This KNIME workflow process the supplied file and tag each amino acid residue according to their `TMs` and finally save all the features into the `*.csv file`.
+    b) This KNIME workflow process the 7(a) i-iv files and tag each amino acid residue according to their `TMs` and finally save all the features into the `*.csv file`.
 
-        Use the following KNIME workflow under Feature Embedding to process the all the above 4 input file.
+        Use the following KNIME workflow under Feature Embedding to process all the above 4 input file.
         GPCR_PLIP_KNIME_WORKFLOW.knwf
 
 8. After receiving the feature matrix from `step.7`, the various machine learning model can be built using the following Jupyter Notebook. However, this notebook shows the best-selected model from binary and multiclass.
 
-        Use `train, validate and test` the binary and multiclass classification model, 
-        the following Jupyter Notebook file under Model Building Folder can be used.
+        To `train, validate and test` the binary and multiclass classification model, use the following Jupyter Notebook file under Model Building Folder.
 
         BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
         MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
@@ -133,7 +133,7 @@ The following programs/packages should be installed.
    
    ![image](https://user-images.githubusercontent.com/86823471/179138335-0f6198e3-0a81-43a2-8785-1a880949a98a.png)
 
-9. The best model (Logistic Regression from Optimized GPCR features for Binary and (CatBoost Classifier from Optimized GPCR features for Multiclass) was further selected for the SHAP to analyze the feature importance and interpretation.
+9. The best model (Logistic Regression from Optimized GPCR features for Binary and CatBoost Classifier from Optimized GPCR features for Multiclass) was further selected for the SHAP to analyze the feature importance and interpretation.
 
         Run the following Jupyter Notebook under the Model Analysis Folder to create the various plots.
         
