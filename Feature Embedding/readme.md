@@ -1,1 +1,1 @@
-The KNIME workflow file (*.tar), after download must be uncompressed, before using it for feature embedding.
+The KNIME workflow file (*.rar), after download must be uncompressed, before using it for feature embedding.
