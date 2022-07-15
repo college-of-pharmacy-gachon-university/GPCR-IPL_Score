@@ -1,7 +1,7 @@
 # Revisiting the Interaction of GPCR based on a Machine Learning Classifier
 ## Description:
 
-Here, the Machine Learning based Classifiers have been built to learn the interaction of GPCR protein-ligand complexes. The interactions are further learned using the SHAP analysis. 
+Here, the Machine Learning based Classifiers have been built to learn the interaction of GPCR protein-ligand complexes. The interactions are further learned using the SHAP plot. 
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/86823471/179157682-86244330-919c-4890-a250-1a91503bc18a.png"/>
@@ -12,21 +12,21 @@ Here, the Machine Learning based Classifiers have been built to learn the intera
 ## Requirement:
 The following programs/packages should be installed.
 1.	Maestro from Schrodinger Suite (any commercial version accepted) (https://schrodinger.com)
-2.	KNIME Analytics Platform (KNIME Version 4.1.4)
+2.	KNIME Analytics Platform (KNIME Version 4.1.4) (https://www.knime.com/downloads)
 3.	Python (Version 3.7)
 4.	Keras (Version 2.8.0)
 5.	Tensorflow (Version 1.14.0)
 6.	SHAP (Version 0.39.0) (https://github.com/slundberg/shap)
-7.	Biopandas
+7.	Biopandas (http://rasbt.github.io/biopandas)
 8.	FuzCav (http://bioinfo-pharma.u-strasbg.fr/labwebsite/download.html)
 9.	ICHEM (http://bioinfo-pharma.u-strasbg.fr/labwebsite/download.html)
-a.	License for ICHEM can be requested from Dr. Didier Rognan (rognan@unistra.fr)
+      
+      a. License for ICHEM can be requested from Dr. Didier Rognan (rognan@unistra.fr)
 10.	E3FP (https://github.com/keiserlab/e3fp)
-a.	Follow the documentation for installation instructions.
 11.	Sckit-learn (Version 0.23.2)
-12.	Catboost (Version 1.0.5)
-13.	LGBM (Version 3.3.2)
-14.	mlxtend (Version 0.19.0)
+12.	Catboost (Version 1.0.5) (https://catboost.ai)
+13.	LGBM (Version 3.3.2) (https://lightgbm.readthedocs.io/en/v3.3.2/Installation-Guide.html)
+14.	mlxtend (Version 0.19.0) (http://rasbt.github.io/mlxtend)
 
 ## General Procedure:
 1.	Collect the GPCR protein-ligand data from GPCRdb and GPCR-EXP.
@@ -34,63 +34,63 @@ a.	Follow the documentation for installation instructions.
        a)	GPCRdb: https://gpcrdb.org/structure
         
        b)	GPCR-EXP: https://zhanggroup.org/GPCR-EXP (From the download page; download the Superposed GPCRs: ``“pdb_overlays.tar.gz”``.)
+       
 2.	After collecting all PDBs for GPCR, check the common PDBs and remove the duplicates.
-3.	Prepare all the proteins using ``“Protein-Preparation Wizard of Schrodinger Suite”`` for missing atoms, adding Hydrogen, assigning the correct protonation state of amino acid residues and minimization of heavy atoms.
 
-4.	The following files must be collected on prepared protein before generating all features.
+3.	Prepare all the proteins using ``“Protein-Preparation Wizard of Schrodinger Suite”`` for missing atoms, add Hydrogens, assigning the correct protonation state of amino acid residues and minimization of heavy atoms.
+
+4.	The following files must be collected on `prepared protein` before generating all features.
   
-    a)	Save prepared protein into a PDB format file `{pdbid}_protein.pdb` to generate the GPCR generic residue numbering system file for each protein.
+    a)	Save prepared protein into a PDB format file `{pdbid}_protein.pdb` to generate the `GPCR generic residue numbering system` file for each protein.
           
        i.	Using the following web link, the GPCR generic residue numbering file can be generated for each PDB file.
        https://gpcrdb.org/structure/generic_numbering_index
        
-       ii.	This will assign the generic residue numbering system to the input `{pdbid}_protein.pdb file` and produces the output file in `{pdbid}_protein_GPCRDB.pdb`.
+       ii.	This will assign the generic residue numbering system to the input file `{pdbid}_protein.pdb` and produces the output file `{pdbid}_protein_GPCRDB.pdb`.
        
-       iii.	Use the Jupyter notebook under Data Preparation Folder to convert `*.pdb` into `*.csv file`.
+       iii.	Use the Jupyter notebook under Data Preparation Folder to convert `*.pdb` into `*.csv file`. `(Batch execution supported)`
                 
         Convert_GPCRPDBs_to_PandasDataframe.ipynb
        
-    b)	Save prepared protein into a MOL2 format file `{pdbid}_ protein.mol2` to perform in-situ minimization using the Szybki (OpenEye Scientific Software).
+    b)	Save prepared protein into a MOL2 format file `{pdbid}_protein.mol2` to perform `in-situ minimization` using the `Szybki (OpenEye Scientific Software)`.
     
     c)	Save the prepared protein into a MOL2 format file `{pdbid}_ pocket.mol2` after trimming the binding site residues within 7.0 Å from the bound ligand.
 
 5. #### Workflow on Non-Optimized GPCR feature generation:
   
-    a)	Generate the Interaction Feature (INT_Feat): Using the `{pdbid}_ pocket.mol2` and bound ligand in *.mol2 as input for ICHEM to generate the `*.ifp`.
+    a)	Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_ pocket.mol2` and bound ligand in `*.mol2` as input for ICHEM to generate the `*.ifp`.
     
-       Use the following script under the Feature Generation Folder
+       Use the following script under the Feature Generation Folder for batch execution 
        sh run-IChem.sh
        
-    b)	Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_ pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
+    b)	Generate the Pocket Feature (POCK_Feat): Use the `{pdbid}_ pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
     
-        Use the follwing script under the Feature Generation Folder step by step:
+        Use the follwing script under the Feature Generation Folder step by step for batch execution:
         sh step1.fuzcav_tagged.sh
         sh step2.listtagged.sh
         sh step3.fuzcav_fp.sh
         
-    c)	Generate the Ligand Feature (LIG_Feat): Save all the Non-Optimized ligand from GPCR PDBs, into `*.sdf file` and using the `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
+    c)	Generate the Ligand Feature (LIG_Feat): Save all the Non-Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
     
         Use the following script under the Feature Generation Folder 
         python E3FP_Gen.py
         
 6. #### Workflow on Optimized GPCR feature generation:
 
-     a)	Using the `{pdbid}_ protein.mol2` and bound ligand `*.mol2` perform the in-situ optimization of ligand and binding site residue using the Szybki (OpenEye Scientific Software).
+     a)	Using the `{pdbid}_ protein.mol2` and bound ligand `*.mol2` perform the `in-situ optimization` of ligand and binding site residue using the `Szybki (OpenEye Scientific Software)`.
 
-        Use the script under the Preprocessing Folder
+        Use the script under the Preprocessing Folder for batch execution
         sh run_szybki.sh
         
     b) After optimization, the output file `{pdbid}_ opt_complex.mol2` is produced, which must be split into protein and ligand.
     
-    c) From the optimized complex trim the binding site residues within 7.0 Å from the bound ligand and save the trimmed protein file as mol2 file `{pdbid}_opt_pocket.mol2`.
+    c) From the optimized complex, trim the binding site residues within 7.0 Å from the bound ligand and save the trimmed protein file as mol2 file `{pdbid}_opt_pocket.mol2`. `(The user can use the maestro or any other related program for the this task)`
     
-    i) The user can use the maestro for the above task.
+    d) The optimized protein and ligand files are further used as an input file to generate the various features like as above in the case of Section 5.
     
-    d) The optimized files must be used as an input file to generate the various features like as above.
-    
-    e) Generate the Interaction Feature (INT_Feat): Using the `{pdbid}_opt_pocket.mol2` and bound ligand in `*.mol2` as input for ICHEM to generate the interaction features `*.ifp`.
+    e) Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_opt_pocket.mol2` and bound ligand in `*.mol2` as input for ICHEM to generate the interaction features `*.ifp`.
 
-        Use the following script under the Feature Generation Folder
+        Use the following script under the Feature Generation Folder for batch execution
         sh run-IChem.sh
      
     f) Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
