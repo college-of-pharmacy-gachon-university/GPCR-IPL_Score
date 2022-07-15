@@ -28,7 +28,7 @@ The following programs/packages should be installed.
 13.	LGBM (Version 3.3.2) (https://lightgbm.readthedocs.io/en/v3.3.2/Installation-Guide.html)
 14.	mlxtend (Version 0.19.0) (http://rasbt.github.io/mlxtend)
 
-## General Procedure:
+## Procedure:
 1.	Collect the GPCR protein-ligand data from GPCRdb and GPCR-EXP.
         
        a)	GPCRdb: https://gpcrdb.org/structure
