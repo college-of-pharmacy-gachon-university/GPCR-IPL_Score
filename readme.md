@@ -121,4 +121,15 @@ a.	Follow the documentation for installation instructions.
         BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
         MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
         
-   Here are the classification metrics best on 10-fold cross validation.
+   Here are the binary and multiclass classification metrics based on 10-fold cross validation.
+   
+   ![image](https://user-images.githubusercontent.com/86823471/179138335-0f6198e3-0a81-43a2-8785-1a880949a98a.png)
+
+9. The best model (Logistic Regression from Optimized GPCR features for Binary and (CatBoost Classifier from Optimized GPCR features for Multiclass) was further selected for the SHAP to analyze the feature importance and interpretation.
+
+        Run the following Jupyter Notebook under the Model Analysis Folder to create the various plots.
+        
+        BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
+        MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
+
+### For any queries regarding the above work, kindly contact Prof. Mi-hyun Kim (kmh0515@gachon.ac.kr).
