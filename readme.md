@@ -97,19 +97,28 @@ a.	Follow the documentation for installation instructions.
         Use the script under the Feature Generation
         python E3FP_Gen.py
 
+7. GPCR feature compilation using the KNIME workflow to make a feature matrix:
+    a) To generate a feature matrix using the KNIME Workflow, the following four files are required.
+    
+    i. GPCR generic residue number file from `4(a(iii))`.
+    
+    ii.	Interaction feature file `*.ifp` from `5(a) or 6(f)`.
+    
+    iii. Pocket feature file `*.txt` from `5(b) or 6(g)`.
+    
+    iv.	Ligand feature file `*.csv` from `5(c) or 6(h)`.
 
+    b) This KNIME workflow process the supplied file and tag each amino acid residue according to their `TMs` and finally save all the features into the `*.csv file`.
 
+        Use the following KNIME workflow under Feature Embedding to process the all the above 4 input file.
+        GPCR_PLIP_KNIME_WORKFLOW.knwf
+
+8. After receiving the feature matrix from `step.7`, the various machine learning model can be built using the following Jupyter Notebook. However, this notebook shows the best-selected model from binary and multiclass.
+
+        Use `train, validate and test` the binary and multiclass classification model, 
+        the following Jupyter Notebook file under Model Building Folder can be used.
+
+        BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
+        MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
         
-        
-7.	GPCR feature compilation using the KNIME workflow to make a feature matrix:
-a.	To generate a feature matrix. The four files are required.
-i.	GPCR generic residue number file from 4(a(iii)).
-ii.	Interaction feature file (*.ifp) from 5(a) or 6(f).
-iii.	Pocket feature file (*.txt) from 5(b) or 6(g).
-iv.	Ligand feature file (*.csv) from 5(c) or 6(h).
-b.	This KNIME workflow process the supplied file and tag each amino acid residue according to their TMs and finally save all the features into the *.csv file.
-Use the following KNIME workflow to process the input file. GPCR_PLIP_KNIME_WORKFLOW.knwf
-8.	After receiving the feature matrix, the various machine learning model can be built using the following Jupyter Notebook. However, this notebook shows the best-selected model (Logistic Regression).
-BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
-MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
-Here are the classification metrics best on 10-fold cross validation.
+   Here are the classification metrics best on 10-fold cross validation.
