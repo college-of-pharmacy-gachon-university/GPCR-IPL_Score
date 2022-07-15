@@ -3,6 +3,12 @@
 
 Here, the Machine Learning based Classifiers have been built to learn the interaction of GPCR protein-ligand complexes. The interactions are further learned using the SHAP analysis. 
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/86823471/179157682-86244330-919c-4890-a250-1a91503bc18a.png"/>
+</p>
+
+#### Figure: The overall workflow for GPCR classification modeling.
+
 ## Requirement:
 The following programs/packages should be installed.
 1.	Maestro from Schrodinger Suite (any commercial version accepted) (https://schrodinger.com)
