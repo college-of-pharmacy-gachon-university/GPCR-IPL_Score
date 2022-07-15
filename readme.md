@@ -79,7 +79,7 @@ The following programs/packages should be installed.
 
      a)	Using the `{pdbid}_ protein.mol2` and bound ligand `*.mol2` perform the `in-situ optimization` of ligand and binding site residue using the `Szybki (OpenEye Scientific Software)`.
 
-        Use the script under the Preprocessing Folder for batch execution
+        Use the script under the Processing Folder for batch execution
         sh run_szybki.sh
         
     b) After optimization, the output file `{pdbid}_ opt_complex.mol2` is produced, which must be split into protein and ligand.
