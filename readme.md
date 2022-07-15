@@ -46,42 +46,61 @@ a.	Follow the documentation for installation instructions.
     
     c)	Save the prepared protein into a MOL2 format file `{pdbid}_ pocket.mol2` after trimming the binding site residues within 7.0 Å from the bound ligand.
 
-5. Workflow on Non-Optimized GPCR feature generation:
+5. #### Workflow on Non-Optimized GPCR feature generation:
   
     a)	Generate the Interaction Feature (INT_Feat): Using the `{pdbid}_ pocket.mol2` and bound ligand in *.mol2 as input for ICHEM to generate the `*.ifp`.
     
-    `Use the script under the Feature Generation`
-    `run-IChem`
-    
+       Use the following script under the Feature Generation Folder
+       sh run-IChem.sh
+       
     b)	Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_ pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
     
-    `Use the script under the Feature Generation`
-    `sh
-    step1.fuzcav_tagged.sh`
-    `step2.listtagged`
-    `step3.fuzcav_fp`
-c.	Generate the Ligand Feature (LIG_Feat): Save all the ligand from GPCR, into *.sdf file and using the *.sdf file as input to generate the E3FP fingerprint in the *.csv file.
-Use the script under the E3FP folder 
-E3FP_Gen.py
-6.	Workflow on Optimized GPCR feature generation:
-a.	Using the {pdbid}_ protein.mol2 and bound ligand (*.mol2) perform the in-situ optimization of ligand and binding site residue using the Szybki (OpenEye Scientific Software).
-Use the script under the Szybki folder:
-run_szybki
-b.	After optimization, the output file {pdbid}_ opt_complex.mol2 is produced, which will be split into protein and ligand.
-c.	Trim the binding site residues within 7.0Å from the bound ligand for the optimized protein-ligand file and save the trimmed protein file as mol2 file => “{pdbid}_opt_pocket.mol2”.
-i.	The user can use the maestro for the above task.
-d.	The optimized files were used as an input file to generate the various features.
-e.	Generate the Interaction Feature (INT_Feat): Using the “{pdbid}_opt_pocket.mol2” and bound ligand in *.mol2 as input for ICHM to generate the *.ifp (interaction fingerprint).
-Use the script under the ICHEM folder
-run-IChem
-f.	Generate the Pocket Feature (POCK_Feat): Using the “{pdbid}_opt_pocket.mol2” as input for FuzCav generate the pocket features in *.txt.
-Use the script under the FuzCav folder:
-step1.fuzcav_tagged.sh
-step2.listtagged
-step3.fuzcav_fp
-g.	Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR, into *.sdf file and using the *.sdf file as input to generate the E3FP fingerprint in the *.csv file.
-Use the script under the E3FP folder 
-E3FP_Gen.py
+        Use the follwing script under the Feature Generation Folder step by step:
+        sh step1.fuzcav_tagged.sh
+        sh step2.listtagged.sh
+        sh step3.fuzcav_fp.sh
+        
+    c)	Generate the Ligand Feature (LIG_Feat): Save all the Non-Optimized ligand from GPCR PDBs, into `*.sdf file` and using the `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
+    
+        Use the following script under the Feature Generation Folder 
+        python E3FP_Gen.py
+        
+6. #### Workflow on Optimized GPCR feature generation:
+
+     a)	Using the `{pdbid}_ protein.mol2` and bound ligand `*.mol2` perform the in-situ optimization of ligand and binding site residue using the Szybki (OpenEye Scientific Software).
+
+        Use the script under the Preprocessing Folder
+        sh run_szybki.sh
+        
+    b) After optimization, the output file `{pdbid}_ opt_complex.mol2` is produced, which must be split into protein and ligand.
+    
+    c) From the optimized complex trim the binding site residues within 7.0 Å from the bound ligand and save the trimmed protein file as mol2 file `{pdbid}_opt_pocket.mol2`.
+    
+    i) The user can use the maestro for the above task.
+    
+    d) The optimized files must be used as an input file to generate the various features like as above.
+    
+    e) Generate the Interaction Feature (INT_Feat): Using the `{pdbid}_opt_pocket.mol2` and bound ligand in `*.mol2` as input for ICHEM to generate the interaction features `*.ifp`.
+
+        Use the following script under the Feature Generation Folder
+        sh run-IChem.sh
+     
+    f) Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
+        
+        Use the follwing script under the Feature Generation Folder step by step:
+        sh step1.fuzcav_tagged.sh
+        sh step2.listtagged.sh
+        sh step3.fuzcav_fp.sh
+        
+    g) Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and using the `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
+    
+        Use the script under the Feature Generation
+        python E3FP_Gen.py
+
+
+
+        
+        
 7.	GPCR feature compilation using the KNIME workflow to make a feature matrix:
 a.	To generate a feature matrix. The four files are required.
 i.	GPCR generic residue number file from 4(a(iii)).
