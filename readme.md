@@ -10,8 +10,8 @@ Here, the Machine Learning based Classifiers have been built to learn the intera
 
 #### Figure: The overall workflow for GPCR classification modeling.
 
-## Requirement:
-The following programs/packages should be installed.
+## Requirements:
+The following programs/packages must be installed.
 1.	Maestro from Schrodinger Suite (any commercial version accepted) (https://schrodinger.com)
 2.	KNIME Analytics Platform (KNIME Version 4.1.4) (https://www.knime.com/downloads)
 3.	Python (Version 3.7)
