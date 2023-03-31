@@ -2,7 +2,7 @@
 
 ## Description:
 
-Here, the Machine Learning based Classifiers have been built to learn the interaction of GPCR protein-ligand complexes. The interactions are further learned using the SHAP plot. 
+Here, the Machine Learning based Classifiers have been built to learn the various interaction of GPCR protein-ligand complexes. These interactions are further learned using the SHAP plot. 
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/51576785/229001792-230f8050-1bff-47c2-a69a-dde9e7b3928d.png"/>
