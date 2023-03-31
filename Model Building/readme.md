@@ -1,1 +1,2 @@
-Run these Jupyter Notebook to built the binary and multiclass models.
+
+Run these Jupyter Notebook to built the binary and biased activation models.
