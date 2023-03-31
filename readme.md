@@ -1,4 +1,5 @@
-# Revisiting the Interaction of GPCR based on a Machine Learning Classifier
+# Multi-Level Featurization of GPCR-Ligand Interaction Patterns and Prediction of Ligand Functions from Selectivity to Biased Activation
+
 ## Description:
 
 Here, the Machine Learning based Classifiers have been built to learn the interaction of GPCR protein-ligand complexes. The interactions are further learned using the SHAP plot. 
