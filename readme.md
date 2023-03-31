@@ -4,7 +4,7 @@
 Here, the Machine Learning based Classifiers have been built to learn the interaction of GPCR protein-ligand complexes. The interactions are further learned using the SHAP plot. 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/86823471/179157682-86244330-919c-4890-a250-1a91503bc18a.png"/>
+  <img src="https://user-images.githubusercontent.com/51576785/229001792-230f8050-1bff-47c2-a69a-dde9e7b3928d.png"/>
 </p>
 
 #### Figure: The overall workflow for GPCR classification modeling.
@@ -58,22 +58,22 @@ The following programs/packages should be installed.
 
 5. #### Workflow on Non-Optimized GPCR feature generation:
   
-    a)	Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_ pocket.mol2` and bound ligand in `*.mol2` as input for ICHEM to generate the `*.ifp`.
+    a)	Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_ pocket.mol2` and bound ligand in `*.mol2` as input for Interaction Features generation (`*.ifp`).
     
        Use the following script under the Feature Generation Folder for batch execution 
-       sh run-IChem.sh
+       sh INT_Feat_Gen.sh
        
-    b)	Generate the Pocket Feature (POCK_Feat): Use the `{pdbid}_ pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
+    b)	Generate the Pocket Feature (POCK_Feat): Use the `{pdbid}_ pocket.mol2` as input for pocket features generation to `*.txt` file.
     
         Use the follwing script under the Feature Generation Folder step by step for batch execution:
-        sh step1.fuzcav_tagged.sh
-        sh step2.listtagged.sh
-        sh step3.fuzcav_fp.sh
+        sh step1.POCK_Feat_Gen_tagged.sh
+        sh step2.POCK_Feat_Gen_listtagged.sh
+        sh step3.POCK_Feat_Gen_fp.sh
         
-    c)	Generate the Ligand Feature (LIG_Feat): Save all the Non-Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
+    c)	Generate the Ligand Feature (LIG_Feat): Save all the Non-Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the 3D fingerprint and save them into the `*.csv file`.
     
         Use the following script under the Feature Generation Folder 
-        python E3FP_Gen.py
+        python LIG_Feat_Gen.py
         
 6. #### Workflow on Optimized GPCR feature generation:
 
@@ -88,22 +88,22 @@ The following programs/packages should be installed.
     
     d) The optimized protein and ligand files are further used as an input file to generate the various features like as above in the case of Section 5.
     
-    e) Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_opt_pocket.mol2` and bound ligand in `*.mol2` as input for ICHEM to generate the interaction features `*.ifp`.
+    e) Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_opt_pocket.mol2` and bound ligand in `*.mol2` as input for Interaction Features generation (`*.ifp`).
 
         Use the following script under the Feature Generation Folder for batch execution
-        sh run-IChem.sh
+        sh INT_Feat_Gen.sh
      
-    f) Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for FuzCav to generate the pocket features in `*.txt`.
+    f) Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for pocket features generation to `*.txt` file.
         
         Use the follwing script under the Feature Generation Folder step by step for batch execution:
-        sh step1.fuzcav_tagged.sh
-        sh step2.listtagged.sh
-        sh step3.fuzcav_fp.sh
+        sh step1.POCK_Feat_Gen_tagged.sh
+        sh step2.POCK_Feat_Gen_listtagged.sh
+        sh step3.POCK_Feat_Gen_fp.sh
         
     g) Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
     
         Use the script under the Feature Generation for batch execution
-        python E3FP_Gen.py
+        python LIG_Feat_Gen.py
 
 7. #### GPCR feature compilation using the KNIME workflow to make a feature matrix:
 
