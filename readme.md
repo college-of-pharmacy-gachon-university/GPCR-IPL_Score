@@ -120,24 +120,20 @@ The following programs/packages should be installed.
     b) This KNIME workflow process the 7(a) i-iv files and tag each amino acid residue according to their `TMs` and finally save all the features into the `*.csv file`.
 
         Use the following KNIME workflow under Feature Embedding to process all the above 4 input file.
-        GPCR_PLIP_KNIME_WORKFLOW.knwf
+        GPCR_KNIME_WORKFLOW.knwf
 
-8. After receiving the feature matrix from `step.7`, the various machine learning model can be built using the following Jupyter Notebook. However, this notebook shows the best-selected model from binary and multiclass.
+8. After receiving the feature matrix from `step.7`, the various machine learning model can be built using the following Jupyter Notebook. However, this notebook shows the best-selected model from binary and multiclass biased activation.
 
-        To `train, validate and test` the binary and multiclass classification model, use the following Jupyter Notebook file under Model Building Folder.
+        To `train, validate and test` the binary and multiclass biased activation classification model, use the following Jupyter Notebook file under Model Building Folder.
 
-        BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
-        MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS.ipynb
+        BINARY_OPT_GPCR_CLASSIFICATION_MODELS.ipynb
+        BIASED_ACTIVATION_GPCR_CLASSIFICATION_MODELS.ipynb
         
-   Here are the binary and multiclass classification metrics based on 10-fold cross validation.
-   
-   ![image](https://user-images.githubusercontent.com/86823471/179138335-0f6198e3-0a81-43a2-8785-1a880949a98a.png)
-
-9. The best model (Logistic Regression from Optimized GPCR features for Binary and CatBoost Classifier from Optimized GPCR features for Multiclass) was further selected for the SHAP to analyze the feature importance and interpretation.
+9. The best model (Logistic Regression for Binary Classifier and XGB for Multiclass Biased Activation Classifier) was further selected for the SHAP to analyze the feature importance and interpretation.
 
         Run the following Jupyter Notebook under the Model Analysis Folder to create the various plots.
         
-        BINARY_OPT_GPCR_PLIP_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
-        MULTICLASS_OPT_GPCR_PLIP_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
+        BINARY_OPT_GPCR_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
+        BIASED_ACTIVATION_GPCR_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
 
-#### For any queries regarding the above work, kindly contact Prof. Mi-hyun Kim (kmh0515@gachon.ac.kr).
+#### For any queries regarding the above work, kindly contact Prof. Mi-hyun Kim (kmh0515@gachon.ac.kr) or Dr. Surendra Kumar (surendramph@gmail.com).
