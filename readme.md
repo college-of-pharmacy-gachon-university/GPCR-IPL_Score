@@ -52,36 +52,49 @@ The following programs/packages must be installed.
 6. Convert the `{pdbid}_opt_protein.pdb` into `{pdbid}_opt_protein.mol2`.
 ### Obtained the GPCR generic numbering system protein file.
 1. Use the `{pdbid}_opt_protein.pdb` to generate the `GPCR generic residue numbering system` file for each protein.
-  a. Using the following web link, and upload your `{pdbid}_opt_protein.pdb` to the server, which will generate `{pdbid}_protein_GPCRDB.pdb` file.
-       https://gpcrdb.org/structure/generic_numbering_index
-  b. Use the following Jupyter notebook under Data Preparation Folder to convert `{pdbid}_protein_GPCRDB.pdb` into `{pdbid}_protein_GPCRDB.csv` file. `(Batch execution supported)`
-        Convert_GPCRPDBs_to_PandasDataframe.ipynb
+   
+    a. Using the following web link, and upload your `{pdbid}_opt_protein.pdb` to the server, which will generate `{pdbid}_protein_GPCRDB.pdb` file.
+         https://gpcrdb.org/structure/generic_numbering_index
+    
+    b. Use the following Jupyter notebook under Data Preparation Folder to convert `{pdbid}_protein_GPCRDB.pdb` into `{pdbid}_protein_GPCRDB.csv` file. `(Batch execution supported)`
+          Convert_GPCRPDBs_to_PandasDataframe.ipynb
 ### Calculate the INT_Feat, POCK_Feat, LIG_Feat.
 1. Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_opt_protein.mol2` and `{pdbid}_opt_7.0_PB.mol2` as input for Interaction Features generation `(*.ifp)`.
-        Use the following script under the Feature Generation Folder for batch execution
+   
+   Use the following script under the Feature Generation Folder for batch execution
+   
         sh INT_Feat_Gen.sh
-2. Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for pocket features generation to `*.txt` file.
-        Use the follwing script under the Feature Generation Folder step by step for batch execution:
+3. Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for pocket features generation to `*.txt` file.
+
+   Use the follwing script under the Feature Generation Folder step by step for batch execution:
+
         sh step1.POCK_Feat_Gen_tagged.sh
         sh step2.POCK_Feat_Gen_listtagged.sh
         sh step3.POCK_Feat_Gen_fp.sh
-3. Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
-        Use the script under the Feature Generation for batch execution
+5. Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
+
+   Use the script under the Feature Generation for batch execution
+   
         python LIG_Feat_Gen.py
 ### GPCR feature compilation using the KNIME workflow to make a feature matrix:
 1. To generate a feature matrix using the KNIME, the following four files are required.
+   
    a. All `{pdbid}_protein_GPCRDB.csv`.
    b. All Interaction feature file `*.ifp`.
    c. Pocket feature file `*.txt`.
    d. Ligand feature file `*.csv`.
-2. Use the following KNIME workflow under Feature Embedding to process all the above 4 input file.
+3. Use the following KNIME workflow under Feature Embedding to process all the above 4 input file.
+
         GPCR_KNIME_WORKFLOW.knwf
-3. This KNIME Workflow will compile all the features and will produce a feature matrix file in `*.csv`, which can be used to build the various machine learning models.
-   a. To `train, validate and test` the binary and biased activation classification model, use the following Jupyter Notebook file under Model Building Folder.
-        BINARY_OPT_GPCR_CLASSIFICATION_MODELS.ipynb
-        BIASED_ACTIVATION_GPCR_CLASSIFICATION_MODELS.ipynb
-4. The features can be further analyzed using the SHAP.
-        Run the following Jupyter Notebook under the Model Analysis Folder to create the various plots.
+5. This KNIME Workflow will compile all the features and will produce a feature matrix file in `*.csv`, which can be used to build the various machine learning models.
+6. To `train, validate and test` the binary and biased activation classification model, use the following Jupyter Notebook file under Model Building Folder.
+
+         BINARY_OPT_GPCR_CLASSIFICATION_MODELS.ipynb
+         BIASED_ACTIVATION_GPCR_CLASSIFICATION_MODELS.ipynb
+7. The features can be further analyzed using the SHAP.
+
+   Run the following Jupyter Notebook under the Model Analysis Folder to create the various plots.
+
         BINARY_OPT_GPCR_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
         BIASED_ACTIVATION_GPCR_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
 
