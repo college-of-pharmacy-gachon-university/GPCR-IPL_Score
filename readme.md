@@ -30,110 +30,58 @@ The following programs/packages must be installed.
 14.	mlxtend (Version 0.19.0) (http://rasbt.github.io/mlxtend)
 
 ## Procedure:
+## The following steps has been designed to calculated the Optimized GPCR features.
+### Collect the Data and Preprocess it:
 1.	Collect the GPCR protein-ligand data from GPCRdb and GPCR-EXP.
-        
        a)	GPCRdb: https://gpcrdb.org/structure
-        
        b)	GPCR-EXP: https://zhanggroup.org/GPCR-EXP (From the download page; download the Superposed GPCRs: ``“pdb_overlays.tar.gz”``.)
-       
 2.	After collecting all PDBs for GPCR, check the common PDBs and remove the duplicates.
-
-3.	Prepare all the proteins using ``“Protein-Preparation Wizard of Schrodinger Suite”`` for missing atoms, add Hydrogens, assigning the correct protonation state of amino acid residues and minimization of heavy atoms.
-
-4.	The following files must be collected on `prepared protein` before generating all features.
-  
-    a)	Save prepared protein into a PDB format file `{pdbid}_protein.pdb` to generate the `GPCR generic residue numbering system` file for each protein.
-          
-       i.	Using the following web link, the GPCR generic residue numbering file can be generated for each PDB file.
+### Prepare the GPCRs complexes.
+1.	Prepare all the proteins using ``“Protein-Preparation Wizard of Schrodinger Suite”`` for missing atoms, add Hydrogens, assigning the correct protonation state of amino acid residues and minimization of heavy atoms.
+### Run the Geomtery Optimization Job.
+1. After preparing the GPCRs complexes, split it into `{pdbid}_protein.mol2` and `{pdbid}_ligand.mol2`.
+2. Arrange the files like this.
+   `{pdbid}/{pdbid}_protein.mol2`
+   `{pdbid}/{pdbid}_ligand.mol2`
+3. Use the script under the Processing Folder for batch execution
+   sh run_szybki.sh
+4. After optimization, multiple files will be produced, however, we have to use the following two files for further processing.
+   `{pdbid}_opt_7.0_PB.mol2`
+   `{pdbid}_opt_protein.pdb`
+5. Extract the pocket (binding site residues within 7.0 Å from the bound ligand) from `{pdbid}_opt_protein.pdb` using `{pdbid}_opt_7.0_PB.mol2` as bound ligand and save them as `{pdbid}_opt_pocket.mol2`. `(The user can use the maestro or any other related program for the this task)`
+6. Convert the `{pdbid}_opt_protein.pdb` into `{pdbid}_opt_protein.mol2`.
+### Obtained the GPCR generic numbering system protein file.
+1. Use the `{pdbid}_opt_protein.pdb` to generate the `GPCR generic residue numbering system` file for each protein.
+  a. Using the following web link, and upload your `{pdbid}_opt_protein.pdb` to the server, which will generate `{pdbid}_protein_GPCRDB.pdb` file.
        https://gpcrdb.org/structure/generic_numbering_index
-       
-       ii.	This will assign the generic residue numbering system to the input file `{pdbid}_protein.pdb` and produces the output file `{pdbid}_protein_GPCRDB.pdb`.
-       
-       iii.	Use the Jupyter notebook under Data Preparation Folder to convert `*.pdb` into `*.csv file`. `(Batch execution supported)`
-                
+  b. Use the following Jupyter notebook under Data Preparation Folder to convert `{pdbid}_protein_GPCRDB.pdb` into `{pdbid}_protein_GPCRDB.csv` file. `(Batch execution supported)`
         Convert_GPCRPDBs_to_PandasDataframe.ipynb
-       
-    b)	Save prepared protein into a MOL2 format file `{pdbid}_protein.mol2` to perform `in-situ minimization` using the `Szybki (OpenEye Scientific Software)`.
-    
-    c)	Save the prepared protein into a MOL2 format file `{pdbid}_ pocket.mol2` after trimming the binding site residues within 7.0 Å from the bound ligand.
-
-5. #### Workflow on Non-Optimized GPCR feature generation:
-  
-    a)	Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_ pocket.mol2` and bound ligand in `*.mol2` as input for Interaction Features generation (`*.ifp`).
-    
-       Use the following script under the Feature Generation Folder for batch execution 
-       sh INT_Feat_Gen.sh
-       
-    b)	Generate the Pocket Feature (POCK_Feat): Use the `{pdbid}_ pocket.mol2` as input for pocket features generation to `*.txt` file.
-    
-        Use the follwing script under the Feature Generation Folder step by step for batch execution:
-        sh step1.POCK_Feat_Gen_tagged.sh
-        sh step2.POCK_Feat_Gen_listtagged.sh
-        sh step3.POCK_Feat_Gen_fp.sh
-        
-    c)	Generate the Ligand Feature (LIG_Feat): Save all the Non-Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the 3D fingerprint and save them into the `*.csv file`.
-    
-        Use the following script under the Feature Generation Folder 
-        python LIG_Feat_Gen.py
-        
-6. #### Workflow on Optimized GPCR feature generation:
-
-     a)	Using the `{pdbid}_ protein.mol2` and bound ligand `*.mol2` perform the `in-situ optimization` of ligand and binding site residue using the `Szybki (OpenEye Scientific Software)`.
-
-        Use the script under the Processing Folder for batch execution
-        sh run_szybki.sh
-        
-    b) After optimization, the output file `{pdbid}_ opt_complex.mol2` is produced, which must be split into protein and ligand.
-    
-    c) From the optimized complex, trim the binding site residues within 7.0 Å from the bound ligand and save the trimmed protein file as mol2 file `{pdbid}_opt_pocket.mol2`. `(The user can use the maestro or any other related program for the this task)`
-    
-    d) The optimized protein and ligand files are further used as an input file to generate the various features like as above in the case of Section 5.
-    
-    e) Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_opt_pocket.mol2` and bound ligand in `*.mol2` as input for Interaction Features generation (`*.ifp`).
-
+### Calculate the INT_Feat, POCK_Feat, LIG_Feat.
+1. Generate the Interaction Feature (INT_Feat): Use the `{pdbid}_opt_protein.mol2` and `{pdbid}_opt_7.0_PB.mol2` as input for Interaction Features generation `(*.ifp)`.
         Use the following script under the Feature Generation Folder for batch execution
         sh INT_Feat_Gen.sh
-     
-    f) Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for pocket features generation to `*.txt` file.
-        
+2. Generate the Pocket Feature (POCK_Feat): Using the `{pdbid}_opt_pocket.mol2` as input for pocket features generation to `*.txt` file.
         Use the follwing script under the Feature Generation Folder step by step for batch execution:
         sh step1.POCK_Feat_Gen_tagged.sh
         sh step2.POCK_Feat_Gen_listtagged.sh
         sh step3.POCK_Feat_Gen_fp.sh
-        
-    g) Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
-    
+3. Generate the Ligand Feature (LIG_Feat): Save all the Optimized ligand from GPCR PDBs, into `*.sdf file` and use the same `*.sdf file` as input to generate the E3FP fingerprint and save them into the `*.csv file`.
         Use the script under the Feature Generation for batch execution
         python LIG_Feat_Gen.py
-
-7. #### GPCR feature compilation using the KNIME workflow to make a feature matrix:
-
-    a) To generate a feature matrix using the KNIME, the following four files are required.
-    
-    i. GPCR generic residue number file from `4(a(iii))`.
-    
-    ii.	Interaction feature file `*.ifp` from `5(a) or 6(f)`.
-    
-    iii. Pocket feature file `*.txt` from `5(b) or 6(g)`.
-    
-    iv.	Ligand feature file `*.csv` from `5(c) or 6(h)`.
-
-    b) This KNIME workflow process the 7(a) i-iv files and tag each amino acid residue according to their `TMs` and finally save all the features into the `*.csv file`.
-
-        Use the following KNIME workflow under Feature Embedding to process all the above 4 input file.
+### GPCR feature compilation using the KNIME workflow to make a feature matrix:
+1. To generate a feature matrix using the KNIME, the following four files are required.
+   a. All `{pdbid}_protein_GPCRDB.csv`.
+   b. All Interaction feature file `*.ifp`.
+   c. Pocket feature file `*.txt`.
+   d. Ligand feature file `*.csv`.
+2. Use the following KNIME workflow under Feature Embedding to process all the above 4 input file.
         GPCR_KNIME_WORKFLOW.knwf
-
-8. After receiving the feature matrix from `step.7`, the various machine learning model can be built using the following Jupyter Notebook. However, this notebook shows the best-selected model from binary and multiclass biased activation.
-
-        To `train, validate and test` the binary and multiclass biased activation classification model, use the following Jupyter Notebook file under Model Building Folder.
-
+3. This KNIME Workflow will compile all the features and will produce a feature matrix file in `*.csv`, which can be used to build the various machine learning models.
+   a. To `train, validate and test` the binary and biased activation classification model, use the following Jupyter Notebook file under Model Building Folder.
         BINARY_OPT_GPCR_CLASSIFICATION_MODELS.ipynb
         BIASED_ACTIVATION_GPCR_CLASSIFICATION_MODELS.ipynb
-        
-9. The best model (Logistic Regression for Binary Classifier and XGB for Multiclass Biased Activation Classifier) was further selected for the SHAP to analyze the feature importance and interpretation.
-
+4. The features can be further analyzed using the SHAP.
         Run the following Jupyter Notebook under the Model Analysis Folder to create the various plots.
-        
         BINARY_OPT_GPCR_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
         BIASED_ACTIVATION_GPCR_CLASSIFICATION_MODELS_SHAP_ANALYSIS.ipynb
 
