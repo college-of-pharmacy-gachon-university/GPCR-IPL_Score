@@ -30,7 +30,7 @@ The following programs/packages must be installed.
 14.	mlxtend (Version 0.19.0) (http://rasbt.github.io/mlxtend)
 
 ## Procedure:
-## The following steps has been designed to calculated the Optimized GPCR features.
+## The following steps has been designed to calculate the Optimized GPCR features.
 ### Collect the Data and Preprocess it:
 1.	Collect the GPCR protein-ligand data from GPCRdb and GPCR-EXP.
        a)	GPCRdb: https://gpcrdb.org/structure
