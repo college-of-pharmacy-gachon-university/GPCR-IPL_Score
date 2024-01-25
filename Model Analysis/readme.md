@@ -2,7 +2,7 @@
 
 ### The following data is provided to analyze the Model.
 
-### For Binary Classification
+### For Binary Classification Model
 GPCR_Opt_ICHEM_FuzCav_Ligand.csv
 
 ### For Biased Activation Model
