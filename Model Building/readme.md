@@ -3,7 +3,7 @@
 
 The following data is provided to run the model and check the predictive performance.
 
-### For Binary Classification
+### For Binary Classification Model
 GPCR_Opt_ICHEM_FuzCav_Ligand.csv
 
 ### For Biased Activation Model
