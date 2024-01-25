@@ -96,7 +96,7 @@ The following programs/packages must be installed.
    
         python LIG_Feat_Gen.py
    
-### Step 6: Compile GPCR Features Using KNIME Workflow:
+### Step 6: Compile GPCR Features Using KNIME Workflow and Build the Classification Model:
 1. Feature Matrix Creation: Use KNIME to create a feature matrix. Required input files:
    
    a. All `{pdbid}_protein_GPCRDB.csv`. (from Step 4)
