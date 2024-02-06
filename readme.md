@@ -10,25 +10,36 @@ In this work, machine learning-based classifiers have been developed to elucidat
 
 #### Figure: The overall workflow for GPCR classification modeling.
 
-## Requirements:
-The following programs/packages must be installed.
-1.	Maestro from Schrodinger Suite (any commercial version accepted) (https://schrodinger.com)
-2.	KNIME Analytics Platform (KNIME Version 4.1.4) (https://www.knime.com/downloads)
-3.	Python (Version 3.7)
-4.	Keras (Version 2.8.0)
-5.	Tensorflow (Version 1.14.0)
-6.	SHAP (Version 0.39.0) (https://github.com/slundberg/shap)
-7.	Biopandas (http://rasbt.github.io/biopandas)
-8.	FuzCav (http://bioinfo-pharma.u-strasbg.fr/labwebsite/download.html)
-9.	ICHEM (http://bioinfo-pharma.u-strasbg.fr/labwebsite/download.html)
-      
-      a. License for ICHEM can be requested from Dr. Didier Rognan (rognan@unistra.fr)
-10.	E3FP (https://github.com/keiserlab/e3fp)
-11.	Sckit-learn (Version 0.23.2)
-12.	Catboost (Version 1.0.5) (https://catboost.ai)
-13.	LGBM (Version 3.3.2) (https://lightgbm.readthedocs.io/en/v3.3.2/Installation-Guide.html)
-14.	mlxtend (Version 0.19.0) (http://rasbt.github.io/mlxtend)
+## Installation and Usage
+First, users should download and install either [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
+Once conda has been installed, download the files from this repository and from the terminal (Linux, MacOs): 
+```bash
+conda env create -f environment.yml
+```
+This will install to install the `gpcr-ipl` conda environment. Follow the instructions appearing on the terminal until the environment installation is complete.
+
+To use GPCR-IPLS Score, activate the `gpcr-ipl` conda environment:
+```bash
+conda activate gpcr-ipl
+```
+## Additional Packages Required:
+
+1. **Maestro from Schrodinger Suite** - Any version (either commercial or free) is accepted. For more information and to obtain Maestro, visit [Schrodinger's website](https://schrodinger.com).
+      
+2. **KNIME Analytics Platform** - Version 4.1.4 recommended. Download KNIME from [here](https://www.knime.com/downloads).
+
+3. **FuzCav** - Available for download at [this link](http://bioinfo-pharma.u-strasbg.fr/labwebsite/download.html). After downloading, unpack the `FuzCav` package on your local machine.
+
+4. **ICHEM** - Obtainable from [here](http://bioinfo-pharma.u-strasbg.fr/labwebsite/download.html). A license for ICHEM can be requested by contacting Dr. Didier Rognan at rognan@unistra.fr. After downloading the `ICHEM` package, please follow the provided instructions to install and configure it properly.
+
+   Set the environment variables for ICHEM using the commands below in your terminal. Replace the paths with the actual locations where you have stored the ICHEM license file and library on your machine:
+
+   ```bash
+   export ICHEM_LIC=~/IChem/IChem_2023-11-20_Kumar.lic
+   export ICHEM_LIB=~/IChem/lib
+   ```
+   
 ## Procedure for Calculating Optimized GPCR Features:
 
 ## This procedure outlines the steps necessary to compute optimized features for G-protein-coupled receptors (GPCRs). It involves data collection, preprocessing, and preparation of GPCR complexes.
