@@ -11,19 +11,32 @@ In this work, machine learning-based classifiers have been developed to elucidat
 #### Figure: The overall workflow for GPCR classification modeling.
 
 ## Installation and Usage
-First, users should download and install either [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+### Step 1: Install Anaconda or Miniconda
+First, download and install [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) based on your preference.
 
-Once conda has been installed, download the files from this repository and from the terminal (Linux, MacOs): 
+### Step 2: Download the Repository
+Clone or download this GitHub repository to your local machine. If you're familiar with Git, you can clone the repository using the following command:
 ```bash
-conda env create -f environment.yml
+git clone https://github.com/college-of-pharmacy-gachon-university/GPCR-IPL_Score.git
 ```
-This will install to install the `gpcr-ipl` conda environment. Follow the instructions appearing on the terminal until the environment installation is complete.
+If you're downloading the ZIP file, ensure to unzip it in your desired directory.
 
-To use GPCR-IPLS Score, activate the `gpcr-ipl` conda environment:
+### Step 3: Create the Conda Environment
+Navigate to the directory containing the `environment.yml` file within the terminal (Linux, macOS) or Anaconda Prompt (Windows). Then, create the `gpcr-ipl` conda environment by executing:
+```bash
+conda env create -f environment.yml
+```
+This command reads the `environment.yml` file and installs all specified packages in a new conda environment named `gpcr-ipl`. Wait for the process to complete as it may take some time depending on your internet speed and system performance.
+
+### Step 4: Activate the Environment
+Once the environment installation is complete, you can activate the `gpcr-ipl` environment using:
 ```bash
 conda activate gpcr-ipl
 ```
-## Additional Packages Required:
+### Step 5: Using GPCR-IPL Score
+With the `gpcr-ipl` environment activated, you're now ready to use the Environment. Follow the specific instructions provided for running scripts or analyzing your data within this environment.
+
+## Additional Standalone Packages Required:
 
 1. **Maestro from Schrodinger Suite** - Any version (either commercial or free) is accepted. For more information and to obtain Maestro, visit [Schrodinger's website](https://schrodinger.com).
       
