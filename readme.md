@@ -102,7 +102,7 @@ With the `gpcr-ipl` environment activated, you're now ready to use the Environme
         {pdbid}_opt_protein.mol2
         
 ### Step 4: Obtain the GPCR Generic Numbering System Protein File.
-1. GPCRdb Processing: Use the {pdbid}_opt_protein.pdb file from Step 3, Job #4, to generate a GPCR generic residue numbering system file for each protein at GPCRdb Generic Numbering Index (https://gpcrdb.org/structure/generic_numbering_index). This will produce a {pdbid}_protein_GPCRDB.pdb file.
+1. GPCRdb Processing: Use the {pdbid}_opt_protein.pdb file from Step 3 (Job #4), to generate a GPCR generic residue numbering system file for each protein at GPCRdb Generic Numbering Index (https://gpcrdb.org/structure/generic_numbering_index). This will produce a {pdbid}_protein_GPCRDB.pdb file.
 2. Conversion to CSV: Utilize the Jupyter notebook in the `Data Preparation Folder`, `Convert_GPCRPDBs_to_PandasDataframe.ipynb`, for batch conversion of {pdbid}_protein_GPCRDB.pdb into {pdbid}_protein_GPCRDB.csv.
 
 ### Step 5: Calculate the INT_Feat, POCK_Feat, LIG_Feat features.
