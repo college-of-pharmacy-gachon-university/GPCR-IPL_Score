@@ -49,7 +49,7 @@ With the `gpcr-ipl` environment activated, you're now ready to use the Environme
    Set the environment variables for ICHEM using the commands below in your terminal. Replace the paths with the actual locations where you have stored the ICHEM license file and library on your machine:
 
    ```bash
-   export ICHEM_LIC=~/IChem/IChem_2023-11-20_Kumar.lic
+   export ICHEM_LIC=~/IChem/IChem_gachon.lic
    export ICHEM_LIB=~/IChem/lib
    ```
    
