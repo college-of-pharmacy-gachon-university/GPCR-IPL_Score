@@ -77,7 +77,7 @@ With the `gpcr-ipl` environment activated, you're now ready to use the Environme
 ## Procedure for Calculating Optimized GPCR Features:
 
 ### Step 3: Run the Geomtery Optimization Job.
-1. Splitting GPCR Complexes: Post-preparation, divide the GPCR complexes into two files per complex: {pdbid}_protein.mol2 and {pdbid}_ligand.mol2 ({pdbid} represents the actual PDB ID of the respective protein).
+1. Splitting GPCR Complexes: Post-preparation, divide the GPCR complexes into two files per complex: {pdbid}_protein.mol2 and {pdbid}_ligand.mol2. ({pdbid} represents the actual PDB ID of the respective protein).
 2. File Organization: Create a main folder and organize the files as follows:
    
          {pdbid}/{pdbid}_protein.mol2
