@@ -52,6 +52,7 @@ With the `gpcr-ipl` environment activated, you're now ready to use the Environme
    export ICHEM_LIC=~/IChem/IChem_gachon.lic
    export ICHEM_LIB=~/IChem/lib
    ```
+5. **OpenEye Software** - To download, please visit [OpenEye Software Download Page](https://www.eyesopen.com/customer-software-download). Note that an OpenEye license is required to execute Szybki tasks.
    
 ## Procedure for Calculating Optimized GPCR Features:
 
