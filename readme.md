@@ -8,6 +8,10 @@ In this work, machine learning-based classifiers have been developed to elucidat
   <img src="https://user-images.githubusercontent.com/51576785/229001792-230f8050-1bff-47c2-a69a-dde9e7b3928d.png"/>
 </p>
 
+Citation:
+Surendra Kumar, Mahesh K Teli, Mi-hyun Kim, GPCR-IPL score: multilevel featurization of GPCR–ligand interaction patterns and prediction of ligand functions from selectivity to biased activation, Briefings in Bioinformatics, Volume 25, Issue 2, March 2024, bbae105, https://doi.org/10.1093/bib/bbae105
+
+
 #### Figure: The overall workflow for GPCR classification modeling.
 
 ## Installation and Usage
